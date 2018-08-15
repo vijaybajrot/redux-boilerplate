@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addTodo, getTodos } from '../actions/todos';
+import { Route, NavLink, Switch, withRouter } from 'react-router-dom';
+import Router from '../routes/index';
+
 
 class App extends Component {
 
@@ -21,13 +24,16 @@ class App extends Component {
   }
 
   render() {
-    const { todos } = this.props;
     var input = '';
 
     return (
-      <div className="App">
+
+      <div className="App" >
+        <Router></Router>
         <header className="App-header">
           <h1 className="App-title">Welcome to React + Redux</h1>
+          <NavLink to="/add">Add Todo</NavLink>
+          <NavLink to="/">List Todos</NavLink>
         </header>
         <div className="App-intro">
           <form onSubmit={(e) => this.addNewTodo(e, input)} >
@@ -53,4 +59,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { addTodo, getTodos })(App);
+export default withRouter(connect(mapStateToProps, { addTodo, getTodos })(App));
